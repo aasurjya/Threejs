@@ -29,7 +29,7 @@ export default function Home() {
       <div className="w-full h-screen">
         <Navigation />
         <RenderModel>
-          <Wizard />
+          {/* <Wizard /> */}
           <MyAvatar/>
         </RenderModel>
       </div>
