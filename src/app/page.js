@@ -9,6 +9,11 @@ const Wizard = dynamic(() => import("@/components/models/Wizard"), {
   ssr: false,
 });
 
+const MyAvatar = dynamic(() => import("@/components/models/MyAvatar"), {
+  ssr: false,
+});
+
+
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between relative">
@@ -25,6 +30,7 @@ export default function Home() {
         <Navigation />
         <RenderModel>
           <Wizard />
+          <MyAvatar/>
         </RenderModel>
       </div>
     </main>
