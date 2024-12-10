@@ -124,6 +124,13 @@ export const BtnList = [
     icon: "resume",
     newTab: true,
   },
+
+  {
+    label: "Projects",
+    link: "https://www.canva.com/design/DAGNu_PYjqk/yvGJnfarxclW2mOi6dJ93w/view",
+    icon: "projects",
+    newTab: true,
+  },
 ];
 
 
