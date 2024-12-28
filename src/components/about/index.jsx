@@ -12,18 +12,16 @@ const AboutDetails = () => {
           }
         >
           <h2 className="  text-xl md:text-2xl text-left w-full capitalize">
-            Architect of Enchantment
+           About Me
           </h2>
           <p className="font-light  text-xs sm:text-sm md:text-base   ">
-            My journey in web development is powered by an array of mystical
-            tools and languages, with JavaScript casting the core of my
-            enchantments. I wield frameworks like React.js and Next.js with
-            precision, crafting seamless portals (websites) that connect realms
-            (users) across the digital universe. The ancient arts of the
-            Jamstack empower me to create fast, secure, and dynamic experiences,
-            while my design skills ensure every creation is not only functional
-            but visually captivating. Join me as I continue to explore new
-            spells and technologies to shape the future of the web.
+            Hi, I’m Aasurjya Bikash Handique, a tech enthusiast specializing in AR/VR development with an M.Tech from IIT Jodhpur.
+            I create immersive applications using tools like Unity, ARKit, and ARCore, focusing on performance optimization and 3D asset integration.
+            Currently working at iHub Drishti, I’ve led projects like AR storytelling apps, VR training modules, and AR-based educational tools.
+
+            With experience in full-stack development, I build robust applications using React, Next.js, and AWS services,
+            alongside expertise in Docker and Kubernetes. Hands on  experience as UI/UX designer, I craft intuitive,user-centric designs to 
+            enhance digital experiences. I’m passionate about solving real-world problems through innovative technology
           </p>
         </ItemLayout>
 
@@ -31,7 +29,7 @@ const AboutDetails = () => {
           className={" col-span-full xs:col-span-6 lg:col-span-4 text-accent"}
         >
           <p className="font-semibold w-full text-left text-2xl sm:text-5xl">
-            25+ <sub className="font-semibold text-base">clients</sub>
+            15+ <sub className="font-semibold text-base">projects</sub>
           </p>
         </ItemLayout>
 
@@ -39,7 +37,7 @@ const AboutDetails = () => {
           className={"col-span-full xs:col-span-6 lg:col-span-4 text-accent"}
         >
           <p className="font-semibold w-full text-left text-2xl sm:text-5xl">
-            4+{" "}
+            2.5+{" "}
             <sub className="font-semibold text-base">years of experience</sub>
           </p>
         </ItemLayout>
@@ -47,21 +45,21 @@ const AboutDetails = () => {
         <ItemLayout
           className={"col-span-full sm:col-span-6 md:col-span-4 !p-0"}
         >
-          <img
+          {/* <img
             className="w-full h-auto"
             src={`${process.env.NEXT_PUBLIC_GITHUB_STATS_URL}/api/top-langs?username=codebucks27&theme=transparent&hide_border=true&title_color=FEFE5B&text_color=FFFFFF&icon_color=FEFE5B&text_bold=false`}
             alt="CodeBucks"
             loading="lazy"
-          />
+          /> */}
         </ItemLayout>
 
         <ItemLayout className={"col-span-full md:col-span-8 !p-0"}>
-          <img
+          {/* <img
             className="w-full h-auto"
             src={`${process.env.NEXT_PUBLIC_GITHUB_STATS_URL}/api?username=codebucks27&theme=transparent&hide_border=true&title_color=FEFE5B&text_color=FFFFFF&icon_color=FEFE5B&text_bold=false`}
             alt="CodeBucks"
             loading="lazy"
-          />
+          /> */}
         </ItemLayout>
 
         <ItemLayout className={"col-span-full"}>
