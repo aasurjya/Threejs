@@ -1,10 +1,17 @@
 "use client";
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
+import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 
 export default function MyAvatar(props) {
-  const { nodes, materials } = useGLTF('models/MyAvatar-transformed.glb');
+  const { nodes, materials } = useGLTF('models//MyAvatar-transformed.glb');
   const groupRef = useRef();
+
+  useFrame(() => {
+    if (groupRef.current) {
+      groupRef.current.rotation.y += 0.01; // Adjust the speed of rotation here
+    }
+  });
 
   return (
     <group
