@@ -15,8 +15,15 @@ export default function AvatarScene() {
         {/* Add ambient and directional lighting */}
         <ambientLight intensity={0.5} />
         <directionalLight position={[10, 10, 5]} intensity={1} />
-        {/* Add OrbitControls for interaction */}
-        <OrbitControls enableZoom={false} />
+        {/* Enhanced OrbitControls configuration */}
+        <OrbitControls 
+          enableZoom={true}
+          enablePan={true}
+          enableRotate={true}
+          minDistance={2}
+          maxDistance={10}
+          rotateSpeed={0.5}
+        />
       </Canvas>
     </div>
   );
