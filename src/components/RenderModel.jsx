@@ -10,7 +10,7 @@ const RenderModel = ({ children, className }) => {
       className={clsx("w-screen h-screen -z-10 relative", className)}
       shadows={false}
       dpr={[1, 2]}
-      // dpr is the device pixel ratio. Here we are setting it to 1 and 2 for retina displays to prevent blurriness in the model rendering on high resolution screens.
+      camera={{ position: [0, 0, 5], fov: 75 }}
     >
       <Suspense fallback={null}>{children}</Suspense>
       <OrbitControls 
@@ -18,8 +18,10 @@ const RenderModel = ({ children, className }) => {
         enablePan={false}
         enableZoom={false}
         rotateSpeed={0.5}
-        minPolarAngle={Math.PI / 2.5}
+        minPolarAngle={Math.PI / 4}
         maxPolarAngle={Math.PI / 1.5}
+        minAzimuthAngle={-Math.PI / 4}
+        maxAzimuthAngle={Math.PI / 4}
       />
       <Environment preset="dawn" />
     </Canvas>
