@@ -10,22 +10,18 @@ const RenderModel = ({ children, className }) => {
       className={clsx("w-screen h-screen -z-10 relative", className)}
       shadows={false}
       dpr={[1, 2]}
-      camera={{
-        position: [0, 0, 5],
-        fov: 45,
-      }}
+      camera={{ position: [0, 0, 5], fov: 75 }}
     >
       <Suspense fallback={null}>{children}</Suspense>
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[5, 5, 5]} intensity={1} />
-      <OrbitControls
-        enableZoom={true}
-        enablePan={true}
+      <OrbitControls 
         enableRotate={true}
-        minDistance={3}
-        maxDistance={10}
+        enablePan={false}
+        enableZoom={false}
         rotateSpeed={0.5}
-        target={[0, 0, 0]}
+        minPolarAngle={Math.PI / 4}
+        maxPolarAngle={Math.PI / 1.5}
+        minAzimuthAngle={-Math.PI / 4}
+        maxAzimuthAngle={Math.PI / 4}
       />
       <Environment preset="dawn" />
     </Canvas>
