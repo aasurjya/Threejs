@@ -2,6 +2,7 @@ import Image from "next/image";
 import bg from "../../../../public/background/projects-background.png";
 import ProjectShowcase from "@/components/projects/ProjectShowcase";
 import { projectsData } from "../../data";
+import PageTransition from "@/components/transitions/PageTransition";
 
 export const metadata = {
   title: "Projects",
@@ -9,7 +10,7 @@ export const metadata = {
 
 export default function Projects() {
   return (
-    <>
+    <PageTransition>
       <Image
         src={bg}
         alt="Next.js Portfolio website's projects page background image"
@@ -19,6 +20,6 @@ export default function Projects() {
       />
 
       <ProjectShowcase projects={projectsData} />
-    </>
+    </PageTransition>
   );
 }

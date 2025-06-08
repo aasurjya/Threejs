@@ -1,6 +1,8 @@
 import Image from "next/image";
 import bg from "../../../../public/background/contact-background.png";
 import Form from "@/components/contact/Form";
+import PageTransition from "@/components/transitions/PageTransition";
+import SectionTransition from "@/components/transitions/SectionTransition";
 
 export const metadata = {
   title: "Contact",
@@ -8,7 +10,7 @@ export const metadata = {
 
 export default function Contact() {
   return (
-    <>
+    <PageTransition>
       <Image
         src={bg}
         alt="Next.js Portfolio website's contact page background image"
@@ -18,7 +20,7 @@ export default function Contact() {
       />
 
       <article className="relative w-full flex flex-col items-center justify-center py-8 sm:py-0 space-y-8">
-        <div className="flex flex-col items-center justify-center space-y-6 w-full sm:w-3/4">
+        <SectionTransition variant="slideUp" delay={0.2} className="flex flex-col items-center justify-center space-y-6 w-full sm:w-3/4">
           <h1 className="text-accent font-semibold text-center text-4xl capitalize">
             summon the wizard
           </h1>
@@ -30,9 +32,12 @@ export default function Contact() {
             your missives through the ethereal network, and await the whisper of
             magic in response.
           </p>
-        </div>
-        <Form />
+        </SectionTransition>
+        
+        <SectionTransition variant="slideUp" delay={0.5}>
+          <Form />
+        </SectionTransition>
       </article>
-    </>
+    </PageTransition>
   );
 }
