@@ -9,6 +9,8 @@ const ProjectShowcase = ({ projects }) => {
   const containerRef = useRef(null);
   const touchStartY = useRef(0);
   const touchEndY = useRef(0);
+  const lastScrollTime = useRef(0);
+  const scrollAccumulator = useRef(0);
 
   const slideVariants = {
     enter: (direction) => ({
@@ -48,6 +50,9 @@ const ProjectShowcase = ({ projects }) => {
     setIsScrolling(true);
     setCurrentIndex(newIndex);
     
+    // Reset scroll accumulator when navigation occurs
+    scrollAccumulator.current = 0;
+    
     setTimeout(() => {
       setIsScrolling(false);
     }, 800);
@@ -57,7 +62,41 @@ const ProjectShowcase = ({ projects }) => {
     if (isScrolling) return;
     
     e.preventDefault();
-    const direction = e.deltaY > 0 ? 1 : -1;
+    
+    const now = Date.now();
+    const timeDelta = now - lastScrollTime.current;
+    lastScrollTime.current = now;
+    
+    // Normalize scroll delta for different input devices
+    let normalizedDelta = e.deltaY;
+    
+    // Detect touchpad vs mouse wheel based on delta values and timing
+    const isTouchpad = Math.abs(e.deltaY) < 100 && timeDelta < 50;
+    
+    if (isTouchpad) {
+      // For touchpads, accumulate small deltas until threshold is reached
+      scrollAccumulator.current += e.deltaY;
+      
+      // Higher threshold for touchpads to prevent oversensitive scrolling
+      const touchpadThreshold = 150;
+      
+      if (Math.abs(scrollAccumulator.current) < touchpadThreshold) {
+        return; // Don't navigate yet, accumulate more scroll
+      }
+      
+      normalizedDelta = scrollAccumulator.current;
+      scrollAccumulator.current = 0; // Reset accumulator
+    } else {
+      // For mouse wheels, use a lower threshold
+      const mouseThreshold = 50;
+      if (Math.abs(e.deltaY) < mouseThreshold) {
+        return;
+      }
+      scrollAccumulator.current = 0; // Reset accumulator for mouse
+    }
+    
+    // Determine direction and navigate
+    const direction = normalizedDelta > 0 ? 1 : -1;
     const newIndex = currentIndex + direction;
     navigateToSlide(newIndex);
   };
@@ -97,10 +136,11 @@ const ProjectShowcase = ({ projects }) => {
     const container = containerRef.current;
     if (!container) return;
 
+    // Use passive: false to allow preventDefault
     container.addEventListener('wheel', handleWheel, { passive: false });
-    container.addEventListener('touchstart', handleTouchStart);
-    container.addEventListener('touchmove', handleTouchMove);
-    container.addEventListener('touchend', handleTouchEnd);
+    container.addEventListener('touchstart', handleTouchStart, { passive: true });
+    container.addEventListener('touchmove', handleTouchMove, { passive: true });
+    container.addEventListener('touchend', handleTouchEnd, { passive: true });
     window.addEventListener('keydown', handleKeyDown);
 
     return () => {
@@ -111,6 +151,11 @@ const ProjectShowcase = ({ projects }) => {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [currentIndex, isScrolling]);
+
+  // Reset scroll accumulator when component mounts or currentIndex changes
+  useEffect(() => {
+    scrollAccumulator.current = 0;
+  }, [currentIndex]);
 
   const currentProject = projects[currentIndex];
 
