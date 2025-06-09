@@ -10,18 +10,6 @@
     --accent: 254 254 91;
     /* hex value of rgb(254,254,91) color is  #FEFE5B  */
   }
-
-  /* Respect user's motion preferences */
-  @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
-  }
 }
 
 @layer utilities {
@@ -32,20 +20,6 @@
   .custom-bg {
     @apply bg-background/20 border border-accent/30 border-solid backdrop-blur-[6px] shadow-glass-inset hover:shadow-glass-sm;
   }
-
-  /* Smooth transitions for better UX */
-  .transition-smooth {
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .transition-bounce {
-    transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
-  }
-
-  /* Focus styles for accessibility */
-  .focus-visible {
-    @apply outline-none ring-2 ring-accent/50 ring-offset-2 ring-offset-background;
-  }
 }
 
 @keyframes move {
@@ -54,51 +28,5 @@
   }
   100% {
     transform: translate(100px, 100px);
-  }
-}
-
-/* Smooth page transitions */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(60px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes crossDissolve {
-  from {
-    opacity: 0;
-    filter: blur(10px);
-  }
-  to {
-    opacity: 1;
-    filter: blur(0);
-  }
-}
-
-/* Ensure smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Reduce motion for users who prefer it */
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
   }
 }

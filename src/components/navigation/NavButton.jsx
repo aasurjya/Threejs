@@ -8,9 +8,9 @@ import {
   Twitter,
   User,
 } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 import ResponsiveComponent from "../ResponsiveComponent";
-import NavigationTransition from "../transitions/NavigationTransition";
 import clsx from "clsx";
 import { motion } from "framer-motion";
 
@@ -43,6 +43,8 @@ const item = {
   show: { scale: 1 },
 };
 
+const NavLink = motion(Link);
+
 const NavButton = ({
   x,
   y,
@@ -52,33 +54,6 @@ const NavButton = ({
   newTab,
   labelDirection = "right",
 }) => {
-  const isExternalLink = newTab || link.startsWith('http');
-
-  const ButtonContent = ({ children }) => (
-    <span className="relative w-14 h-14 p-4 animate-spin-slow-reverse group-hover:pause hover:text-accent">
-      {getIcon(icon)}
-      <span className="peer bg-transparent absolute top-0 left-0 w-full h-full" />
-      <span className="absolute hidden peer-hover:block px-2 py-1 left-full mx-2 top-1/2 -translate-y-1/2 bg-background text-foreground text-sm rounded-md shadow-lg whitespace-nowrap">
-        {label}
-      </span>
-    </span>
-  );
-
-  const MobileButtonContent = ({ children }) => (
-    <span className="relative w-10 h-10 xs:w-14 xs:h-14 p-2.5 xs:p-4 hover:text-accent">
-      {getIcon(icon)}
-      <span className="peer bg-transparent absolute top-0 left-0 w-full h-full" />
-      <span
-        className={clsx(
-          "absolute hidden peer-hover:block px-2 py-1 left-full mx-2 top-1/2 -translate-y-1/2 bg-background text-foreground text-sm rounded-md shadow-lg whitespace-nowrap",
-          labelDirection === "left" ? "right-full left-auto" : ""
-        )}
-      >
-        {label}
-      </span>
-    </span>
-  );
-
   return (
     <ResponsiveComponent>
       {({ size }) => {
@@ -87,59 +62,58 @@ const NavButton = ({
             className="absolute cursor-pointer z-50"
             style={{ transform: `translate(${x}, ${y})` }}
           >
-            {isExternalLink ? (
-              <motion.a
-                variants={item}
-                href={link}
-                target={newTab ? "_blank" : "_self"}
-                rel={newTab ? "noopener noreferrer" : undefined}
-                className="text-foreground rounded-full flex items-center justify-center custom-bg"
-                aria-label={label}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <ButtonContent />
-              </motion.a>
-            ) : (
-              <NavigationTransition
-                href={link}
-                transitionType="slideRight"
-                className="text-foreground rounded-full flex items-center justify-center custom-bg"
-                aria-label={label}
-              >
-                <motion.div variants={item}>
-                  <ButtonContent />
-                </motion.div>
-              </NavigationTransition>
-            )}
+            <NavLink
+              variants={item}
+              href={link}
+              target={newTab ? "_blank" : "_self"}
+              className="text-foreground  rounded-full flex items-center justify-center
+        custom-bg
+        "
+              aria-label={label}
+              name={label}
+              prefetch={false}
+              scroll={false}
+            >
+              <span className="relative  w-14 h-14 p-4 animate-spin-slow-reverse group-hover:pause hover:text-accent">
+                {getIcon(icon)}
+
+                <span className="peer bg-transparent absolute top-0 left-0 w-full h-full" />
+
+                <span className="absolute hidden peer-hover:block px-2 py-1 left-full mx-2 top-1/2 -translate-y-1/2 bg-background text-foreground text-sm rounded-md shadow-lg whitespace-nowrap">
+                  {label}
+                </span>
+              </span>
+            </NavLink>
           </div>
         ) : (
           <div className="w-fit cursor-pointer z-50">
-            {isExternalLink ? (
-              <motion.a
-                variants={item}
-                href={link}
-                target={newTab ? "_blank" : "_self"}
-                rel={newTab ? "noopener noreferrer" : undefined}
-                className="text-foreground rounded-full flex items-center justify-center custom-bg"
-                aria-label={label}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <MobileButtonContent />
-              </motion.a>
-            ) : (
-              <NavigationTransition
-                href={link}
-                transitionType="fade"
-                className="text-foreground rounded-full flex items-center justify-center custom-bg"
-                aria-label={label}
-              >
-                <motion.div variants={item}>
-                  <MobileButtonContent />
-                </motion.div>
-              </NavigationTransition>
-            )}
+            <NavLink
+              variants={item}
+              href={link}
+              target={newTab ? "_blank" : "_self"}
+              className="text-foreground  rounded-full flex items-center justify-center
+        custom-bg
+        "
+              aria-label={label}
+              name={label}
+              prefetch={false}
+              scroll={false}
+            >
+              <span className="relative  w-10 h-10  xs:w-14 xs:h-14 p-2.5 xs:p-4 hover:text-accent">
+                {getIcon(icon)}
+
+                <span className="peer bg-transparent absolute top-0 left-0 w-full h-full" />
+
+                <span
+                  className={clsx(
+                    "absolute hidden peer-hover:block px-2 py-1 left-full mx-2 top-1/2 -translate-y-1/2 bg-background text-foreground text-sm rounded-md shadow-lg whitespace-nowrap",
+                    labelDirection === "left" ? "right-full left-auto" : ""
+                  )}
+                >
+                  {label}
+                </span>
+              </span>
+            </NavLink>
           </div>
         );
       }}
