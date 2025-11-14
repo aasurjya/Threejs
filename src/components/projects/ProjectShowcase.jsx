@@ -312,20 +312,22 @@ const ProjectShowcase = ({ projects }) => {
                 </motion.div>
 
                 {/* Key Achievements */}
-                <motion.div variants={itemVariants} className="space-y-3">
-                  <div className="flex items-center space-x-2 text-muted">
-                    <TrendingUp className="w-4 h-4" />
-                    <span className="text-sm font-semibold">Key Achievements</span>
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {currentProject.achievements.slice(0, 4).map((achievement, index) => (
-                      <div key={index} className="flex items-center space-x-2">
-                        <div className="w-1.5 h-1.5 bg-accent rounded-full" />
-                        <span className="text-foreground text-sm">{achievement}</span>
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
+                {currentProject.achievements && currentProject.achievements.length > 0 && (
+                  <motion.div variants={itemVariants} className="space-y-3">
+                    <div className="flex items-center space-x-2 text-muted">
+                      <TrendingUp className="w-4 h-4" />
+                      <span className="text-sm font-semibold">Key Achievements</span>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {currentProject.achievements.slice(0, 4).map((achievement, index) => (
+                        <div key={index} className="flex items-center space-x-2">
+                          <div className="w-1.5 h-1.5 bg-accent rounded-full" />
+                          <span className="text-foreground text-sm">{achievement}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
 
                 {/* Action Buttons */}
                 <motion.div variants={itemVariants} className="flex flex-wrap gap-4 pt-4">

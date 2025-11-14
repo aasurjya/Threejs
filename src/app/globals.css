@@ -20,6 +20,91 @@
   .custom-bg {
     @apply bg-background/20 border border-accent/30 border-solid backdrop-blur-[6px] shadow-glass-inset hover:shadow-glass-sm;
   }
+
+  .ripple::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle, rgba(var(--accent), 0.25) 0%, transparent 60%);
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .ripple:hover::after {
+    opacity: 1;
+    transform: scale(1.05);
+    animation: ripple-wave 1.2s ease-out infinite;
+  }
+
+  .spring-line {
+    position: relative;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(var(--accent), 0.7) 0px,
+      rgba(var(--accent), 0.7) 4px,
+      transparent 4px,
+      transparent 8px
+    );
+    border-radius: 9999px;
+    box-shadow: 0 0 12px rgba(var(--accent), 0.25);
+  }
+
+  .spring-line::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(var(--accent), 0.35),
+      transparent 70%
+    );
+    border-radius: inherit;
+    opacity: 0.8;
+  }
+
+  /* Custom Scrollbar */
+  .scrollbar-thin::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 9999px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: rgba(var(--accent), 0.3);
+    border-radius: 9999px;
+    transition: background 0.3s ease;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: rgba(var(--accent), 0.5);
+  }
+
+  /* Firefox */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(var(--accent), 0.3) transparent;
+  }
+}
+
+@keyframes ripple-wave {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.45;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
 }
 
 @keyframes move {

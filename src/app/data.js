@@ -18,6 +18,98 @@ Websites:
 
 export const projectsData = [
   {
+    id: 11,
+    title: "Blockchain Insurance App",
+    category: "Full-Stack Development",
+    description: "A university project on a blockchain-based insurance application. The project explores the use of blockchain for insurance processes, featuring a mobile app component.",
+    technologies: ["Blockchain", "Databases", "Mobile Apps"],
+    timeline: "N/A",
+    completionDate: "2022",
+    role: "Researcher",
+    responsibilities: [
+      "Developed a proof-of-concept for a decentralized insurance application.",
+      "Focused on computer science, blockchain databases, and mobile app integration."
+    ],
+    demoLink: "",
+    sourceLink: "http://agnee.tezu.ernet.in:8999/cgi-bin/koha/opac-detail.pl?biblionumber=57680&shelfbrowse_itemnumber=213769#holdings",
+    image: "https://i.pinimg.com/1200x/9d/7f/7c/9d7f7c9e91cce0af6f3d0ee06b6b6062.jpg",
+    status: "Completed"
+  },
+  {
+    id: 7,
+    title: "NexProp - Premium Real Estate",
+    category: "Full-Stack Development",
+    description: "A premium real estate platform for luxury properties. Users can filter properties by price, size, and bedrooms, with features like virtual tours coming soon.",
+    technologies: ["Next.js", "React", "Tailwind CSS"],
+    timeline: "3 months",
+    completionDate: "2024-01-01",
+    role: "Full-Stack Developer",
+    responsibilities: [
+      "Developed the frontend with Next.js and React",
+      "Implemented property filtering and search functionality",
+      "Designed and built the user interface"
+    ],
+    demoLink: "https://nexprop-a.vercel.app/",
+    sourceLink: "",
+    image: "https://i.pinimg.com/1200x/56/4e/32/564e322cf1e235a491091696e4d3ef1d.jpg",
+    status: "Live"
+  },
+  {
+    id: 8,
+    title: "Ghor Bhara - Assamese Rental Marketplace",
+    category: "Full-Stack Development",
+    description: "An online platform for searching and renting homes across Assam, connecting tenants with verified landlords. Features include secure payments and 24/7 support.",
+    technologies: ["Next.js", "React", "Tailwind CSS"],
+    timeline: "4 months",
+    completionDate: "2023-11-01",
+    role: "Full-Stack Developer",
+    responsibilities: [
+      "Built the complete platform from scratch",
+      "Implemented user authentication and property management features",
+      "Ensured the platform is secure and reliable"
+    ],
+    demoLink: "https://tiloirent.vercel.app/",
+    sourceLink: "",
+    image: "https://i.pinimg.com/1200x/1d/b5/5c/1db55cd0d4cd8792b2043614d6f90e1a.jpg",
+    status: "Live"
+  },
+  {
+    id: 9,
+    title: "BookSelfManager",
+    category: "Full-Stack Development",
+    description: "A full-stack application for managing a personal library of books. Allows users to add, organize, and track their books.",
+    technologies: ["Docker", "JavaScript"],
+    timeline: "2 months",
+    completionDate: "2023-09-01",
+    role: "Full-Stack Developer",
+    responsibilities: [
+      "Developed the backend and frontend of the application",
+      "Containerized the application using Docker"
+    ],
+    demoLink: "",
+    sourceLink: "https://github.com/aasurjya/BookSelfManager",
+    image: "https://i.pinimg.com/1200x/8c/6c/41/8c6c41c1e82af0da8223790fb7d1c0da.jpg",
+    status: "Completed"
+  },
+  {
+    id: 10,
+    title: "Movies App",
+    category: "Frontend Development",
+    description: "A simple and elegant movie browsing application built with Vue.js.",
+    technologies: ["Vue.js", "Netlify"],
+    timeline: "1 month",
+    completionDate: "2023-08-01",
+    role: "Frontend Developer",
+    responsibilities: [
+      "Developed the user interface using Vue.js",
+      "Deployed the application to Netlify"
+    ],
+    demoLink: "https://aasurjya-movies-app.netlify.app/",
+    sourceLink: "https://github.com/aasurjya/movies-app-vue",
+    image: "https://i.pinimg.com/1200x/15/28/9d/15289d665fb692e8a54915a43a44e070.jpg",
+    status: "Live"
+  },
+  {
     id: 1,
     title: "AR Storytelling Experience",
     category: "Augmented Reality",
@@ -67,32 +159,6 @@ export const projectsData = [
     demoLink: "https://vr-training.example.com",
     sourceLink: "https://github.com/aasurjya/vr-training",
     image: "https://images.pexels.com/photos/8728382/pexels-photo-8728382.jpeg?auto=compress&cs=tinysrgb&w=800",
-    status: "Live"
-  },
-  {
-    id: 3,
-    title: "Smart City Dashboard",
-    category: "Full-Stack Development",
-    description: "A real-time data visualization platform for smart city management. Integrates IoT sensors, traffic systems, and environmental data to provide actionable insights for urban planning and emergency response.",
-    technologies: ["React", "Next.js", "D3.js", "AWS", "Docker", "PostgreSQL"],
-    timeline: "10 months",
-    completionDate: "2023-06-30",
-    role: "Full-Stack Developer & Data Architect",
-    responsibilities: [
-      "Built responsive dashboard interface",
-      "Designed real-time data pipelines",
-      "Implemented microservices architecture",
-      "Created data visualization components"
-    ],
-    achievements: [
-      "Processing 1M+ data points daily",
-      "30% improvement in response times",
-      "Adopted by 5 major cities",
-      "99.9% uptime maintained"
-    ],
-    demoLink: "https://smart-city-dashboard.example.com",
-    sourceLink: "https://github.com/aasurjya/smart-city-dashboard",
-    image: "https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg?auto=compress&cs=tinysrgb&w=800",
     status: "Live"
   },
   {
@@ -178,7 +244,8 @@ export const projectsData = [
 export const BtnList = [
   { label: "Home", link: "/", icon: "home", newTab: false },
   { label: "About", link: "/about", icon: "about", newTab: false },
-  { label: "Projects", link: "https://www.canva.com/design/DAGNu_PYjqk/yvGJnfarxclW2mOi6dJ93w/view#1", icon: "projects", newTab: false },
+  { label: "3D/AR/VR", link: "https://www.canva.com/design/DAGNu_PYjqk/yvGJnfarxclW2mOi6dJ93w/view#1", icon: "projects", newTab: false },
+  { label: "Fullstack", link: "/fullstack", icon: "code", newTab: false },
   { label: "Contact", link: "/contact", icon: "contact", newTab: false },
   {
     label: "Github",
