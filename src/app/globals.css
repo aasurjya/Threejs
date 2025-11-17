@@ -21,6 +21,37 @@
     @apply bg-background/20 border border-accent/30 border-solid backdrop-blur-[6px] shadow-glass-inset hover:shadow-glass-sm;
   }
 
+  .glass-droplet {
+    position: absolute;
+    border-radius: 9999px;
+    background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.12) 35%, transparent 70%);
+    box-shadow: 0 12px 45px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    opacity: 0.32;
+  }
+
+  .glass-droplet--soft {
+    background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.14) 32%, transparent 70%);
+    opacity: 0.26;
+  }
+
+  .glass-droplet--blue {
+    background: radial-gradient(circle at 25% 15%, rgba(37, 99, 235, 0.35) 0%, rgba(37, 99, 235, 0.18) 24%, rgba(191, 219, 254, 0.12) 42%, transparent 72%);
+  }
+
+  .droplet-float-slow {
+    animation: droplet-float 22s ease-in-out infinite;
+  }
+
+  .droplet-float-medium {
+    animation: droplet-drift 26s ease-in-out infinite;
+  }
+
+  .droplet-float-fast {
+    animation: droplet-drift 18s ease-in-out infinite;
+  }
+
   .ripple::after {
     content: "";
     position: absolute;
@@ -113,5 +144,29 @@
   }
   100% {
     transform: translate(100px, 100px);
+  }
+}
+
+@keyframes droplet-float {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -16px, 0) scale(1.02);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes droplet-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(14px, -20px, 0) scale(1.03);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
   }
 }
