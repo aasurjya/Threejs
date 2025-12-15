@@ -6,9 +6,7 @@ export const metadata = {
 };
 
 export default function Home() {
-  const fullstackProjects = projectsData.filter(
-    p => p.category === "Full-Stack Development" || p.category === "Frontend Development"
-  );
+  const fullstackProjects = projectsData;
 
   return (
     <main className="relative min-h-screen w-full bg-background overflow-hidden">
