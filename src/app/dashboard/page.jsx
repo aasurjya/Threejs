@@ -245,15 +245,13 @@ export default function Dashboard() {
         {/* Recent Visitors Table */}
         <div className="bg-zinc-900 p-6 rounded-xl border border-zinc-800">
           <h2 className="text-xl font-semibold mb-4 text-white">
-            📍 Visitor Details (with GPS Coordinates)
+            📍 Visitor Details
           </h2>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-zinc-700">
-                  <th className="text-left py-3 px-4 text-zinc-400">Country</th>
-                  <th className="text-left py-3 px-4 text-zinc-400">City</th>
-                  <th className="text-left py-3 px-4 text-zinc-400">Region</th>
+                  <th className="text-left py-3 px-4 text-zinc-400">Location (Country, State, City)</th>
                   <th className="text-left py-3 px-4 text-zinc-400">Latitude</th>
                   <th className="text-left py-3 px-4 text-zinc-400">Longitude</th>
                   <th className="text-left py-3 px-4 text-zinc-400">Source</th>
@@ -261,30 +259,32 @@ export default function Dashboard() {
                 </tr>
               </thead>
               <tbody>
-                {data.countries.slice(0, 10).map((country, idx) => (
-                  <tr key={idx} className="border-b border-zinc-800 hover:bg-zinc-800/50">
-                    <td className="py-3 px-4 text-white">{country._id}</td>
-                    <td className="py-3 px-4 text-zinc-300">
-                      {data.cities[idx]?._id || "-"}
-                    </td>
-                    <td className="py-3 px-4 text-zinc-300">-</td>
-                    <td className="py-3 px-4 text-zinc-300 font-mono text-xs">-</td>
-                    <td className="py-3 px-4 text-zinc-300 font-mono text-xs">-</td>
-                    <td className="py-3 px-4 text-zinc-300">
-                      <span className="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-xs">
-                        IP
-                      </span>
-                    </td>
-                    <td className="py-3 px-4 font-semibold text-yellow-500">
-                      {country.count}
-                    </td>
-                  </tr>
-                ))}
+                {data.countries.slice(0, 10).map((country, idx) => {
+                  const city = data.cities[idx]?._id || "-";
+                  const region = "-";
+                  const locationString = `${country._id}, ${region}, ${city}`;
+                  
+                  return (
+                    <tr key={idx} className="border-b border-zinc-800 hover:bg-zinc-800/50">
+                      <td className="py-3 px-4 text-white font-medium">{locationString}</td>
+                      <td className="py-3 px-4 text-zinc-300 font-mono text-xs">-</td>
+                      <td className="py-3 px-4 text-zinc-300 font-mono text-xs">-</td>
+                      <td className="py-3 px-4 text-zinc-300">
+                        <span className="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-xs">
+                          IP
+                        </span>
+                      </td>
+                      <td className="py-3 px-4 font-semibold text-yellow-500">
+                        {country.count}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
           <p className="text-xs text-zinc-500 mt-4">
-            💡 Tip: When visitors grant location permission, their precise GPS coordinates will appear here. Otherwise, IP-based location is used.
+            💡 Format: Country, State, City | When visitors grant GPS permission, precise coordinates will appear here.
           </p>
         </div>
       </div>

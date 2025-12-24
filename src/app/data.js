@@ -245,6 +245,7 @@ export const BtnList = [
   { label: "About", link: "/about", icon: "about", newTab: false },
   { label: "3D/AR/VR", link: "https://www.canva.com/design/DAGNu_PYjqk/yvGJnfarxclW2mOi6dJ93w/view#1", icon: "projects", newTab: false },
   { label: "Fullstack", link: "/fullstack", icon: "code", newTab: false },
+  { label: "Dashboard", link: "/dashboard", icon: "analytics", newTab: false },
   { label: "Contact", link: "/contact", icon: "contact", newTab: false },
   {
     label: "Github",

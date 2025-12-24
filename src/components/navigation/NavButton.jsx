@@ -8,6 +8,7 @@ import {
   Phone,
   Twitter,
   User,
+  BarChart3,
 } from "lucide-react";
 import Link from "next/link";
 import React from "react";
@@ -25,6 +26,8 @@ const getIcon = (icon) => {
       return <Box className="w-full h-auto" strokeWidth={1.5} />;
     case "code":
       return <Code className="w-full h-auto" strokeWidth={1.5} />;
+    case "analytics":
+      return <BarChart3 className="w-full h-auto" strokeWidth={1.5} />;
     case "contact":
       return <Phone className="w-full h-auto" strokeWidth={1.5} />;
     case "github":
