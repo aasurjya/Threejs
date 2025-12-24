@@ -4,6 +4,7 @@ import clsx from "clsx";
 import FireFliesBackground from "@/components/FireFliesBackground";
 import Sound from "@/components/Sound";
 import SchemaMarkup from "@/components/SchemaMarkup";
+import VisitorTracker from "@/components/VisitorTracker";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -50,6 +51,7 @@ export default function RootLayout({ children }) {
         {children}
         <FireFliesBackground />
         <Sound />
+        <VisitorTracker />
         <div id="my-modal" />
       </body>
     </html>
