@@ -10,19 +10,71 @@ export default function VisitorTracker() {
 
     async function track() {
       try {
+        let latitude = null;
+        let longitude = null;
+        let accuracy = null;
+        let locationSource = "ip";
+
+        // Try to get precise location with user permission
+        if (navigator.geolocation) {
+          await new Promise((resolve) => {
+            navigator.geolocation.getCurrentPosition(
+              async (position) => {
+                latitude = position.coords.latitude;
+                longitude = position.coords.longitude;
+                accuracy = position.coords.accuracy;
+                locationSource = "gps";
+                resolve();
+              },
+              () => {
+                // User denied permission or error - continue without precise location
+                resolve();
+              },
+              { timeout: 5000, enableHighAccuracy: true }
+            );
+          });
+        }
+
+        // Get IP-based location as fallback
         const geoRes = await fetch("https://ipapi.co/json/");
         if (!geoRes.ok) return;
         const geoData = await geoRes.json();
+
+        // Reverse geocode if we have precise coordinates
+        let preciseCity = geoData.city;
+        let preciseRegion = geoData.region;
+        let preciseCountry = geoData.country_name;
+
+        if (latitude && longitude) {
+          try {
+            const reverseGeoRes = await fetch(
+              `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+            );
+            if (reverseGeoRes.ok) {
+              const reverseGeoData = await reverseGeoRes.json();
+              const address = reverseGeoData.address || {};
+              preciseCity = address.city || address.town || address.village || geoData.city;
+              preciseRegion = address.state || geoData.region;
+              preciseCountry = address.country || geoData.country_name;
+            }
+          } catch (err) {
+            console.warn("Reverse geocoding failed:", err.message);
+          }
+        }
 
         await fetch("/api/track", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             ip: geoData.ip,
-            country: geoData.country_name,
+            country: preciseCountry,
             countryCode: geoData.country_code,
-            region: geoData.region,
-            city: geoData.city,
+            region: preciseRegion,
+            city: preciseCity,
+            latitude: latitude,
+            longitude: longitude,
+            accuracy: accuracy,
+            locationSource: locationSource,
             userAgent: navigator.userAgent,
             deviceType: /Mobile|Android|iPhone/i.test(navigator.userAgent)
               ? "mobile"

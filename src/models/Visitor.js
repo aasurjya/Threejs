@@ -8,10 +8,18 @@ const VisitorSchema = new mongoose.Schema({
   ip: String,
   country: String,
   countryCode: String,
-  region: String, // State
+  region: String,
   city: String,
+  latitude: Number,
+  longitude: Number,
+  accuracy: Number,
+  locationSource: {
+    type: String,
+    enum: ['gps', 'ip'],
+    default: 'ip',
+  },
   userAgent: String,
-  deviceType: String, // mobile, desktop, tablet
+  deviceType: String,
   path: String,
 });
 

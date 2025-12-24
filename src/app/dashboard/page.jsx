@@ -245,7 +245,7 @@ export default function Dashboard() {
         {/* Recent Visitors Table */}
         <div className="bg-zinc-900 p-6 rounded-xl border border-zinc-800">
           <h2 className="text-xl font-semibold mb-4 text-white">
-            📍 Visitor Details
+            📍 Visitor Details (with GPS Coordinates)
           </h2>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
@@ -254,6 +254,9 @@ export default function Dashboard() {
                   <th className="text-left py-3 px-4 text-zinc-400">Country</th>
                   <th className="text-left py-3 px-4 text-zinc-400">City</th>
                   <th className="text-left py-3 px-4 text-zinc-400">Region</th>
+                  <th className="text-left py-3 px-4 text-zinc-400">Latitude</th>
+                  <th className="text-left py-3 px-4 text-zinc-400">Longitude</th>
+                  <th className="text-left py-3 px-4 text-zinc-400">Source</th>
                   <th className="text-left py-3 px-4 text-zinc-400">Visitors</th>
                 </tr>
               </thead>
@@ -265,6 +268,13 @@ export default function Dashboard() {
                       {data.cities[idx]?._id || "-"}
                     </td>
                     <td className="py-3 px-4 text-zinc-300">-</td>
+                    <td className="py-3 px-4 text-zinc-300 font-mono text-xs">-</td>
+                    <td className="py-3 px-4 text-zinc-300 font-mono text-xs">-</td>
+                    <td className="py-3 px-4 text-zinc-300">
+                      <span className="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-xs">
+                        IP
+                      </span>
+                    </td>
                     <td className="py-3 px-4 font-semibold text-yellow-500">
                       {country.count}
                     </td>
@@ -273,6 +283,9 @@ export default function Dashboard() {
               </tbody>
             </table>
           </div>
+          <p className="text-xs text-zinc-500 mt-4">
+            💡 Tip: When visitors grant location permission, their precise GPS coordinates will appear here. Otherwise, IP-based location is used.
+          </p>
         </div>
       </div>
     </div>
