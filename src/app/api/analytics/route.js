@@ -16,14 +16,38 @@ export async function GET() {
       { $limit: 10 }
     ]);
 
-    // 3. Visitors by City
+    // 3. Visitors by State/Region
+    const states = await Visitor.aggregate([
+      { $group: { _id: '$region', count: { $sum: 1 } } },
+      { $match: { _id: { $ne: null } } },
+      { $sort: { count: -1 } },
+      { $limit: 10 }
+    ]);
+
+    // 4. Visitors by City
     const cities = await Visitor.aggregate([
       { $group: { _id: '$city', count: { $sum: 1 } } },
       { $sort: { count: -1 } },
       { $limit: 10 }
     ]);
 
-    // 4. Visitors Last 7 Days (for Graph)
+    // 5. Visitors by Country, State, City (Combined Location)
+    const locations = await Visitor.aggregate([
+      {
+        $group: {
+          _id: {
+            country: '$country',
+            region: '$region',
+            city: '$city'
+          },
+          count: { $sum: 1 }
+        }
+      },
+      { $sort: { count: -1 } },
+      { $limit: 15 }
+    ]);
+
+    // 6. Visitors Last 7 Days (for Graph)
     const sevenDaysAgo = new Date();
     sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
     
@@ -41,7 +65,9 @@ export async function GET() {
     return NextResponse.json({
       totalVisitors,
       countries,
+      states,
       cities,
+      locations,
       recentViews
     }, { status: 200 });
 
