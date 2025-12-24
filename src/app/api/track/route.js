@@ -7,7 +7,7 @@ export async function POST(request) {
     await dbConnect();
     
     const body = await request.json();
-    const { ip, country, countryCode, region, city, userAgent, deviceType, path } = body;
+    const { ip, country, countryCode, region, city, latitude, longitude, accuracy, locationSource, userAgent, deviceType, path } = body;
 
     // Create a new visitor entry
     await Visitor.create({
@@ -16,6 +16,10 @@ export async function POST(request) {
       countryCode,
       region,
       city,
+      latitude,
+      longitude,
+      accuracy,
+      locationSource,
       userAgent,
       deviceType,
       path,

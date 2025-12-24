@@ -62,7 +62,7 @@ export default function VisitorTracker() {
           }
         }
 
-        await fetch("/api/track", {
+        const trackRes = await fetch("/api/track", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -82,6 +82,13 @@ export default function VisitorTracker() {
             path: window.location.pathname,
           }),
         });
+
+        if (!trackRes.ok) {
+          const errorData = await trackRes.json();
+          console.error("Tracking failed:", trackRes.status, errorData);
+          return;
+        }
+        console.log("Visitor tracked successfully");
       } catch (err) {
         console.warn("Tracking skipped:", err.message);
       }
