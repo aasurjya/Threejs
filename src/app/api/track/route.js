@@ -9,8 +9,7 @@ export async function POST(request) {
     const body = await request.json();
     const { ip, country, countryCode, region, city, latitude, longitude, accuracy, locationSource, userAgent, deviceType, path } = body;
 
-    // Create a new visitor entry
-    await Visitor.create({
+    const visitorData = {
       ip,
       country,
       countryCode,
@@ -24,11 +23,14 @@ export async function POST(request) {
       deviceType,
       path,
       timestamp: new Date(),
-    });
+    };
 
-    return NextResponse.json({ success: true }, { status: 201 });
+    const result = await Visitor.create(visitorData);
+    console.log('Visitor tracked successfully:', result._id);
+
+    return NextResponse.json({ success: true, visitorId: result._id }, { status: 201 });
   } catch (error) {
-    console.error('Tracking Error:', error);
+    console.error('Tracking Error:', error.message, error.stack);
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }

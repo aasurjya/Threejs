@@ -62,25 +62,29 @@ export default function VisitorTracker() {
           }
         }
 
+        const trackPayload = {
+          ip: geoData.ip,
+          country: preciseCountry,
+          countryCode: geoData.country_code,
+          region: preciseRegion,
+          city: preciseCity,
+          latitude: latitude,
+          longitude: longitude,
+          accuracy: accuracy,
+          locationSource: locationSource,
+          userAgent: navigator.userAgent,
+          deviceType: /Mobile|Android|iPhone/i.test(navigator.userAgent)
+            ? "mobile"
+            : "desktop",
+          path: window.location.pathname,
+        };
+
+        console.log("Sending tracking data:", trackPayload);
+
         const trackRes = await fetch("/api/track", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            ip: geoData.ip,
-            country: preciseCountry,
-            countryCode: geoData.country_code,
-            region: preciseRegion,
-            city: preciseCity,
-            latitude: latitude,
-            longitude: longitude,
-            accuracy: accuracy,
-            locationSource: locationSource,
-            userAgent: navigator.userAgent,
-            deviceType: /Mobile|Android|iPhone/i.test(navigator.userAgent)
-              ? "mobile"
-              : "desktop",
-            path: window.location.pathname,
-          }),
+          body: JSON.stringify(trackPayload),
         });
 
         if (!trackRes.ok) {
@@ -88,7 +92,8 @@ export default function VisitorTracker() {
           console.error("Tracking failed:", trackRes.status, errorData);
           return;
         }
-        console.log("Visitor tracked successfully");
+        const trackResult = await trackRes.json();
+        console.log("Visitor tracked successfully:", trackResult);
       } catch (err) {
         console.warn("Tracking skipped:", err.message);
       }
